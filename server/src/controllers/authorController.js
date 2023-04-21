@@ -1,10 +1,11 @@
+
 //=====================Importing Module and Packages=====================//
-const userModel=require('../models/userModel.js')
+const AuthorModel = require("../models/authorModel.js")
 const JWT = require('jsonwebtoken')
 
 
 //=====================This function is used for Creating an user=====================//
-const createUser=async function(req,res){
+const createauthor=async function(req,res){
     try{ 
     const data=req.body
     const {email,password}=data
@@ -13,7 +14,7 @@ const createUser=async function(req,res){
     if(!email) return res.status(400).send({status:false, message:"email is mandatory"})
    if(!password) return res.status(400).send({status:false, message:"password is mandatory"})
    
-    const userCreated=await userModel.create(data)
+    const authorCreated=await AuthorModel.create(data)
     return res.status(201).send({status:true, message:"Success", data:userCreated})
 }
 catch(err){
@@ -24,21 +25,21 @@ catch(err){
 //============================login user===========================//
 
 
-const loginUser = async function (req, res) {
+const loginauthor = async function (req, res) {
     try {
-        let email =req.body.userName;
+        let email =req.body.authorName;
         let password =req.body.password
     
         //=====================Checking Mandotory Field=====================//
         if (!(email && password)) { return res.status(400).send("All Fields are Mandotory.") }
 
 
-        let userData = await userModel.findOne({email: email, password: password })
-        if (!userData) { return res.status(400).send({ status: false, message: "invalid credentials! pls check it " }) }
+        let authorData = await AuthorModel.findOne({email: email, password: password })
+        if (!authorData) { return res.status(400).send({ status: false, message: "invalid credentials! pls check it " }) }
 
         let payload =
         {
-            userId: userData['_id'].toString()  
+            userId: authorData['_id'].toString()  
             
 
         }
@@ -55,4 +56,4 @@ catch (error) {
 
     
 }
-module.exports ={loginUser,createUser}
+module.exports ={loginauthor,createauthor}
