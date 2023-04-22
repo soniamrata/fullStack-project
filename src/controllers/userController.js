@@ -26,7 +26,7 @@ catch(err){
 
 const loginUser = async function (req, res) {
     try {
-        let email =req.body.userName;
+        let email =req.body.email;
         let password =req.body.password
     
         //=====================Checking Mandotory Field=====================//
