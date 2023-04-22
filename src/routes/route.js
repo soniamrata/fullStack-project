@@ -7,13 +7,17 @@ const{ authentication , authorization } = require("../middleware/middleware.js")
 
 
 
+//---------------------- author's APIs ----------------------//
+
+
+router.post("/register", authorController.authors)
+
+router.post("/loginAuthor",authorController.authorLogin )
+
+
 //---------------------- user's's APIs ----------------------//
-
-//===================== User Registration (Post API) =====================//
-router.post("/register", createUser)
-//===================== User Login (Post API) =====================//
-router.post("/login", loginUser)
-
+router.post("/registerUser", createUser)
+router.post("/userlogin", loginUser)
 //-----------------------Blogs api's--------------------------------------------//
 
 router.post("/blogs", authentication , authorization , BlogControllers.createBlog)
